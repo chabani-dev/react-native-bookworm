@@ -4,10 +4,16 @@ import "dotenv/config";
 import connectDB from './lib/db.js';
 import booksRouter from './routes/booksRouter.js';
 import userRouter from './routes/userRouter.js';
+// import job from './lib/cron.js';
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 
+// Vérifier si l'API_URL est définie pour le CRON job
+// job.start();
+// if (!process.env.API_URL) {
+//     console.error('❌ API_URL is not defined. CRON job will not run.');
+// }
 // Middleware
 app.use(express.json());
 app.use(cors());

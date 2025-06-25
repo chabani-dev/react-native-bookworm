@@ -5,14 +5,14 @@ const protectRoute = async (req, res, next) => { // Correction de resizeBy → r
     try {
         // 📌 Récupérer le token depuis les headers
         const authHeader = req.header("Authorization");
-        if (!authHeader || !authHeader.startsWith("Bearer ")) {
+        if (!authHeader || !authHeader.startsWith("Bearer")) {
             return res.status(401).json({ message: 'Unauthorized, no token provided' });
         }
 
         const token = authHeader.split(" ")[1]; // Extraire le token correctement
 
         // 📌 Vérifier le token
-        const decoded = jwt.verify(token, process.env.JWT_SECRET);
+        const decoded = jwt.verify(token, process.env.RANDOM_TOKEN_SECRET);
 
         // 📌 Trouver l'utilisateur
         const user = await User.findById(decoded.id).select('-password');
